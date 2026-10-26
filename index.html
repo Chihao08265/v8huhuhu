@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CHIHABCR VIP - FUTURE BACCARAT AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+--bg-body: #05070a;
+--bg-card: rgba(13, 17, 28, 0.85);
+--gold-glow: #ffb700;
+--gold-gradient: linear-gradient(135deg, #ffe066 0%, #f39c12 50%, #995c00 100%);
+--neon-cyan: #00f3ff;
+--neon-blue: #0066ff;
+--banker-red: #ff2a55;
+--player-blue: #0088ff;
+--tie-green: #00e676;
+--text-main: #ffffff;
+--text-sub: #8a99ad;
+--border-glow: rgba(0, 243, 255, 0.2);
+}
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+}
+body {
+font-family: 'Rajdhani', sans-serif;
+background-color: var(--bg-body);
+color: var(--text-main);
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+background-image:
+radial-gradient(circle at 50% 10%, rgba(0, 243, 255, 0.12) 0%, transparent 50%),
+radial-gradient(circle at 50% 90%, rgba(255, 183, 0, 0.08) 0%, transparent 50%);
+overflow-x: hidden;
+}
+.app-container {
+width: 100%;
+max-width: 480px;
+height: 100vh;
+max-height: 920px;
+background: rgba(8, 11, 19, 0.95);
+border: 1px solid rgba(255, 183, 0, 0.25);
+border-radius: 20px;
+box-shadow: 0 0 50px rgba(0,0,0,0.9), 0 0 25px rgba(0, 243, 255, 0.15);
+display: flex;
+flex-direction: column;
+position: relative;
+overflow: hidden;
+backdrop-filter: blur(20px);
+}
+/* WATERMARK */
+.watermark {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) rotate(-30deg);
+font-family: 'Orbitron', sans-serif;
+font-size: 42px;
+font-weight: 900;
+color: rgba(255, 255, 255, 0.02);
+pointer-events: none;
+letter-spacing: 6px;
+white-space: nowrap;
+z-index: 0;
+}
+/* HEADER */
+.header {
+padding: 16px 20px;
+background: rgba(13, 17, 26, 0.8);
+border-bottom: 1px solid var(--border-glow);
+display: flex;
+justify-content: space-between;
+align-items: center;
+z-index: 10;
+}
+.brand-title {
+font-family: 'Orbitron', sans-serif;
+font-size: 18px;
+font-weight: 900;
+background: var(--gold-gradient);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing: 1.5px;
+text-shadow: 0 0 15px rgba(255, 183, 0, 0.3);
+}
+.user-coins {
+display: flex;
+align-items: center;
+gap: 6px;
+background: rgba(255, 183, 0, 0.1);
+border: 1px solid rgba(255, 183, 0, 0.4);
+padding: 5px 12px;
+border-radius: 20px;
+font-family: 'Orbitron', sans-serif;
+font-size: 13px;
+font-weight: 700;
+color: var(--gold-glow);
+box-shadow: 0 0 10px rgba(255, 183, 0, 0.2);
+}
+/* NAVIGATION TABS */
+.nav-tabs {
+display: flex;
+background: rgba(5, 7, 12, 0.9);
+border-bottom: 1px solid rgba(255,255,255,0.05);
+z-index: 10;
+}
+.tab-btn {
+flex: 1;
+padding: 12px;
+border: none;
+background: transparent;
+color: var(--text-sub);
+font-family: 'Rajdhani', sans-serif;
+font-size: 13px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 1px;
+cursor: pointer;
+transition: all 0.3s ease;
+position: relative;
+}
+.tab-btn.active {
+color: var(--neon-cyan);
+text-shadow: 0 0 8px var(--neon-cyan);
+}
+.tab-btn.active::after {
+content: '';
+position: absolute;
+bottom: 0;
+left: 20%;
+right: 20%;
+height: 2px;
+background: var(--neon-cyan);
+box-shadow: 0 0 8px var(--neon-cyan);
+}
+/* MAIN CONTENT VIEWS */
+.content-area {
+flex: 1;
+position: relative;
+overflow-y: auto;
+z-index: 5;
+padding: 15px;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+.tab-content {
+display: none;
+flex-direction: column;
+gap: 15px;
+width: 100%;
+}
+.tab-content.active {
+display: flex;
+}
+/* AUTH MODAL & SYSTEM */
+.auth-overlay {
+position: absolute;
+inset: 0;
+background: rgba(5, 7, 12, 0.98);
+z-index: 100;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+backdrop-filter: blur(15px);
+transition: opacity 0.3s ease;
+}
+.auth-card {
+width: 100%;
+background: var(--bg-card);
+border: 1px solid rgba(255, 183, 0, 0.4);
+border-radius: 16px;
+padding: 25px;
+box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 15px rgba(0, 243, 255, 0.05);
+}
+.auth-title {
+font-family: 'Orbitron', sans-serif;
+font-size: 20px;
+font-weight: 900;
+text-align: center;
+margin-bottom: 20px;
+color: var(--gold-glow);
+letter-spacing: 2px;
+}
+.form-group {
+margin-bottom: 15px;
+}
+.form-group label {
+display: block;
+font-size: 11px;
+color: var(--text-sub);
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 6px;
+}
+.form-control {
+width: 100%;
+background: rgba(0,0,0,0.6);
+border: 1px solid rgba(255, 255, 255, 0.15);
+border-radius: 8px;
+padding: 12px 14px;
+color: #fff;
+font-family: 'Rajdhani', sans-serif;
+font-size: 15px;
+outline: none;
+transition: border-color 0.3s ease;
+}
+.form-control:focus {
+border-color: var(--neon-cyan);
+box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+}
+.btn-action {
+width: 100%;
+padding: 14px;
+border: none;
+border-radius: 8px;
+background: var(--gold-gradient);
+color: #000;
+font-family: 'Orbitron', sans-serif;
+font-size: 14px;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 1px;
+cursor: pointer;
+box-shadow: 0 4px 15px rgba(255, 183, 0, 0.3);
+transition: transform 0.1s ease;
+}
+.btn-action:active {
+transform: scale(0.97);
+}
+/* CARD COMPONENTS */
+.glass-card {
+background: var(--bg-card);
+border: 1px solid rgba(255, 255, 255, 0.08);
+border-radius: 14px;
+padding: 15px;
+position: relative;
+box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+/* PREDICTION BOX */
+.predict-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 10px;
+}
+.card-label {
+font-size: 11px;
+color: var(--text-sub);
+text-transform: uppercase;
+letter-spacing: 1.5px;
+font-weight: 700;
+}
+.ai-badges {
+display: flex;
+gap: 6px;
+}
+.ai-chip {
+font-size: 9px;
+padding: 2px 6px;
+border-radius: 4px;
+background: rgba(0, 243, 255, 0.1);
+border: 1px solid var(--neon-cyan);
+color: var(--neon-cyan);
+font-family: 'Orbitron', sans-serif;
+}
+.predict-main {
+text-align: center;
+padding: 15px 0;
+}
+.predict-result {
+font-family: 'Orbitron', sans-serif;
+font-size: 34px;
+font-weight: 900;
+letter-spacing: 2px;
+min-height: 48px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.res-p { color: var(--player-blue); filter: drop-shadow(0 0 12px var(--player-blue)); }
+.res-b { color: var(--banker-red); filter: drop-shadow(0 0 12px var(--banker-red)); }
+.res-idle { color: var(--gold-glow); font-size: 16px; }
+/* LOADING BAR */
+.progress-box {
+margin-top: 10px;
+}
+.progress-info {
+display: flex;
+justify-content: space-between;
+font-size: 11px;
+color: var(--text-sub);
+margin-bottom: 4px;
+}
+.progress-track {
+height: 6px;
+background: rgba(255,255,255,0.08);
+border-radius: 3px;
+overflow: hidden;
+}
+.progress-fill {
+height: 100%;
+width: 0%;
+background: linear-gradient(90deg, var(--neon-blue), var(--neon-cyan), var(--gold-glow));
+transition: width 0.1s linear;
+}
+/* INPUT CONTROL BUTTONS */
+.input-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 10px;
+margin-top: 5px;
+}
+.btn-input {
+padding: 18px 0;
+border: none;
+border-radius: 12px;
+font-family: 'Orbitron', sans-serif;
+font-size: 15px;
+font-weight: 900;
+color: #fff;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+transition: transform 0.05s ease, filter 0.2s ease;
+box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.btn-input:active {
+transform: scale(0.94);
+}
+.btn-p-val { background: linear-gradient(180deg, #1e75ff, #0044cc); border: 1px solid #4d94ff; }
+.btn-b-val { background: linear-gradient(180deg, #ff3355, #b30024); border: 1px solid #ff8093; }
+.btn-t-val { background: linear-gradient(180deg, #00e676, #008040); border: 1px solid #66ffa6; }
+/* KHU VỰC BẢNG LỊCH SỬ ĐÚNG / SAI */
+.stats-summary {
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+gap: 8px;
+margin-bottom: 12px;
+text-align: center;
+}
+.stat-item {
+background: rgba(0,0,0,0.4);
+border: 1px solid rgba(255,255,255,0.05);
+padding: 8px;
+border-radius: 8px;
+}
+.stat-val {
+font-family: 'Orbitron', sans-serif;
+font-size: 16px;
+font-weight: 800;
+}
+.stat-val.win { color: var(--tie-green); }
+.stat-val.loss { color: var(--banker-red); }
+.stat-val.rate { color: var(--neon-cyan); }
+.stat-lbl {
+font-size: 10px;
+color: var(--text-sub);
+text-transform: uppercase;
+}
+.accuracy-list {
+display: flex;
+flex-direction: column;
+gap: 8px;
+max-height: 220px;
+overflow-y: auto;
+padding-right: 4px;
+}
+.acc-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: rgba(0,0,0,0.3);
+border: 1px solid rgba(255,255,255,0.05);
+padding: 8px 12px;
+border-radius: 8px;
+font-size: 12px;
+}
+.acc-round {
+font-family: 'Orbitron', sans-serif;
+color: var(--text-sub);
+font-weight: 700;
+}
+.acc-predict {
+font-weight: 700;
+}
+.acc-tag {
+padding: 3px 8px;
+border-radius: 4px;
+font-family: 'Orbitron', sans-serif;
+font-size: 10px;
+font-weight: 800;
+}
+.tag-win { background: rgba(0, 230, 118, 0.15); color: var(--tie-green); border: 1px solid var(--tie-green); }
+.tag-loss { background: rgba(255, 42, 85, 0.15); color: var(--banker-red); border: 1px solid var(--banker-red); }
+/* ROADMAP */
+.roadmap-container {
+display: flex;
+gap: 6px;
+overflow-x: auto;
+padding: 5px 0;
+}
+.dot {
+width: 24px;
+height: 24px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: 'Orbitron', sans-serif;
+font-size: 10px;
+font-weight: 800;
+flex-shrink: 0;
+box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+}
+.dot-P { background: var(--player-blue); }
+.dot-B { background: var(--banker-red); }
+.dot-T { background: var(--tie-green); }
+/* TOAST NOTIFICATION */
+.toast-msg {
+position: absolute;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%) translateY(100px);
+background: rgba(13, 17, 26, 0.95);
+border: 1px solid var(--gold-glow);
+color: #fff;
+padding: 10px 20px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: 700;
+box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+transition: transform 0.3s ease;
+z-index: 200;
+pointer-events: none;
+white-space: nowrap;
+}
+.toast-msg.show {
+transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+<div class="app-container">
+<div class="watermark">CHIHAOBCR</div>
+<!-- AUTH OVERLAY -->
+<div class="auth-overlay" id="authScreen">
+<div class="auth-card">
+<div class="auth-title">CHIHABCR VIP AI</div>
+<div class="form-group">
+<label>Tài Khoản Hợp Lệ</label>
+<input type="text" id="accInput" class="form-control" placeholder="Nhập tên tài khoản..." value="lien1984">
+</div>
+<div class="form-group">
+<label>Mật Khẩu Cấp 1</label>
+<input type="password" id="pass1Input" class="form-control" placeholder="Nhập mật khẩu cấp 1..." value="chihao2010">
+</div>
+<div class="form-group">
+<label>Mật Khẩu Cấp 2</label>
+<input type="password" id="pass2Input" class="form-control" placeholder="Nhập mật khẩu cấp 2..." value="168211">
+</div>
+<button class="btn-action" onclick="handleLogin()">KÍCH HOẠT HỆ THỐNG</button>
+</div>
+</div>
+<!-- HEADER -->
+<header class="header">
+<div class="brand-title">CHIHABCR v5.0 VIP</div>
+<div class="user-coins">
+<span>🪙</span>
+<span id="coinBalance">1,000</span>
+</div>
+</header>
+<!-- NAVIGATION TABS -->
+<nav class="nav-tabs">
+<button class="tab-btn active" onclick="switchTab('gameTab', this)">⚡ BÀN CHƠI AI</button>
+<button class="tab-btn" onclick="switchTab('historyTab', this)">📊 LỊCH SỬ ĐÚNG/SAI</button>
+<button class="tab-btn" onclick="switchTab('adminTab', this)">⚙️ ADMIN VIP</button>
+</nav>
+<!-- CONTENT AREA -->
+<div class="content-area">
+<!-- TAB 1: BÀN CHƠI MAIN -->
+<div class="tab-content active" id="gameTab">
+<!-- PREDICTION DISPLAY -->
+<div class="glass-card">
+<div class="predict-header">
+<span class="card-label">HỘI ĐỒNG AI DỰ ĐOÁN VÁN KẾ TIẾP</span>
+<div class="ai-badges">
+<span class="ai-chip">GPT 95%</span>
+<span class="ai-chip">GEMINI 92%</span>
+</div>
+</div>
+<div class="predict-main">
+<div class="predict-result res-idle" id="predictText">BẤM KẾT QUẢ ĐỂ AI PHÂN TÍCH</div>
+</div>
+<div class="progress-box">
+<div class="progress-info">
+<span>TIẾN TRÌNH PHÂN TÍCH ALGORITHM</span>
+<span id="percentText">0%</span>
+</div>
+<div class="progress-track">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+</div>
+</div>
+<!-- BUTTON INPUTS -->
+<div class="glass-card">
+<span class="card-label">NHẬP KẾT QUẢ VỪA RA BẰNG 3 NÚT</span>
+<div class="input-grid">
+<button class="btn-input btn-p-val" onclick="submitResult('P')">PLAYER</button>
+<button class="btn-input btn-b-val" onclick="submitResult('B')">BANKER</button>
+<button class="btn-input btn-t-val" onclick="submitResult('T')">TIE</button>
+</div>
+</div>
+<!-- ROADMAP HISTORY -->
+<div class="glass-card">
+<span class="card-label">LỊCH SỬ CẦU HIỆN TẠI (15 VÁN BAN ĐẦU)</span>
+<div class="roadmap-container" id="roadmapGrid"></div>
+</div>
+</div>
+<!-- TAB 2: KHU VỰC BẢNG LỊCH SỬ ĐÚNG / SAI -->
+<div class="tab-content" id="historyTab">
+<div class="glass-card">
+<span class="card-label">THỐNG KÊ HIỆU SUẤT DỰ ĐOÁN</span>
+<div class="stats-summary">
+<div class="stat-item">
+<div class="stat-val win" id="statWin">0</div>
+<div class="stat-lbl">THẮNG (ĐÚNG)</div>
+</div>
+<div class="stat-item">
+<div class="stat-val loss" id="statLoss">0</div>
+<div class="stat-lbl">THUA (SAI)</div>
+</div>
+<div class="stat-item">
+<div class="stat-val rate" id="statRate">0%</div>
+<div class="stat-lbl">TỶ LỆ CHUẨN</div>
+</div>
+</div>
+<span class="card-label">BẢNG LỊCH SỬ ĐÚNG / SAI CHI TIẾT</span>
+<div class="accuracy-list" id="accuracyList">
+<!-- Items render dynamically -->
+</div>
+</div>
+</div>
+<!-- TAB 3: ADMIN -->
+<div class="tab-content" id="adminTab">
+<div class="glass-card">
+<span class="card-label">QUẢN LÝ XU TÀI KHOẢN (ADMIN)</span>
+<div class="form-group" style="margin-top: 10px;">
+<label>Cộng/Trừ Xu Người Chơi</label>
+<input type="number" id="coinAmountInput" class="form-control" placeholder="Nhập số xu (VD: 50)...">
+</div>
+<button class="btn-action" onclick="addCoinsAdmin()">NẠP XU CHO TÀI KHOẢN</button>
+<button class="btn-action" style="margin-top: 10px; background: rgba(0,243,255,0.2); border: 1px solid var(--neon-cyan); color: #fff;" onclick="switchTab('gameTab', document.querySelectorAll('.tab-btn')[0])">⚡ VÀO BÀN CHƠI NGAY</button>
+</div>
+</div>
+</div>
+</div>
+<div class="toast-msg" id="toast">Thông báo</div>
+<script>
+// TRẠNG THÁI HỆ THỐNG
+const App = {
+coins: 100,
+isAdmin: false,
+// 同步 15 ván ban đầu
+history: ['P', 'B', 'P', 'P', 'B', 'B', 'P', 'B', 'P', 'B', 'B', 'P', 'B', 'P', 'B'],
+accuracyHistory: [],
+lastPrediction: null,
+isAnalyzing: false
+};
+// ĐĂNG NHẬP 2 CẤP
+function handleLogin() {
+const acc = document.getElementById('accInput').value.trim();
+const p1 = document.getElementById('pass1Input').value.trim();
+const p2 = document.getElementById('pass2Input').value.trim();
+if (acc === 'lien1984' && p1 === 'chihao2010' && p2 === '168211') {
+App.isAdmin = true;
+App.coins = 999999;
+document.getElementById('authScreen').style.opacity = '0';
+setTimeout(() => document.getElementById('authScreen').style.display = 'none', 300);
+updateCoinsDisplay();
+showToast("Đăng nhập ADMIN VIP thành công!");
+renderRoadmap();
+} else if (acc.length >= 3 && p1.length >= 3) {
+App.isAdmin = false;
+document.getElementById('authScreen').style.opacity = '0';
+setTimeout(() => document.getElementById('authScreen').style.display = 'none', 300);
+updateCoinsDisplay();
+showToast("Đăng nhập người chơi thành công!");
+renderRoadmap();
+} else {
+showToast("Thông tin đăng nhập không chính xác! Vui lòng liên hệ Admin!");
+}
+}
+// CHUYỂN TAB MƯỢT
+function switchTab(tabId, btnEl) {
+document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+document.getElementById(tabId).classList.add('active');
+btnEl.classList.add('active');
+}
+// CẬP NHẬT HIỂN THỊ XU (🪙)
+function updateCoinsDisplay() {
+document.getElementById('coinBalance').innerText = App.coins.toLocaleString();
+}
+// NHẬP KẾT QUẢ BẰNG 3 NÚT (TRỪ 2 XU & CHẠY DỰ ĐOÁN)
+function submitResult(res) {
+if (App.isAnalyzing) return;
+if (!App.isAdmin && App.coins < 2) {
+showToast("Số dư không đủ! Cần tối thiểu 2 Xu 🪙 để dự đoán.");
+return;
+}
+// Đánh giá dự đoán ván trước
+if (App.lastPrediction && res !== 'T') {
+const isWin = App.lastPrediction === res;
+App.accuracyHistory.unshift({
+round: App.history.length + 1,
+predicted: App.lastPrediction,
+actual: res,
+isWin: isWin
+});
+renderAccuracyList();
+}
+// Trừ 2 Xu
+if (!App.isAdmin) {
+App.coins -= 2;
+updateCoinsDisplay();
+}
+// Thêm lịch sử cầu
+App.history.push(res);
+renderRoadmap();
+// Chạy phân tích AI với hiệu ứng Loading 3s
+runAIAnalysis();
+}
+// THUẬT TOÁN AI VÀ HIỆU ỨNG LOADING 3S MƯỢT
+function runAIAnalysis() {
+App.isAnalyzing = true;
+const fill = document.getElementById('progressFill');
+const percentText = document.getElementById('percentText');
+const predictText = document.getElementById('predictText');
+predictText.className = "predict-result res-idle";
+predictText.innerText = "ĐANG PHÂN TÍCH CẦU...";
+let startTime = null;
+const duration = 3000; // 3 giây loading
+function step(timestamp) {
+if (!startTime) startTime = timestamp;
+const progress = Math.min((timestamp - startTime) / duration, 1);
+const percent = Math.floor(progress * 100);
+fill.style.width = percent + "%";
+percentText.innerText = percent + "%";
+if (progress < 1) {
+requestAnimationFrame(step);
+} else {
+// Phân tích hoàn tất
+App.isAnalyzing = false;
+makePrediction();
+}
+}
+requestAnimationFrame(step);
+}
+// TÍNH TOÁN KẾT QUẢ DỰ ĐOÁN
+function makePrediction() {
+const filtered = App.history.filter(x => x !== 'T');
+const len = filtered.length;
+const last1 = filtered[len - 1];
+const last2 = filtered[len - 2];
+let pred = (last1 === last2) ? last1 : (last1 === 'P' ? 'B' : 'P');
+App.lastPrediction = pred;
+const predictText = document.getElementById('predictText');
+if (pred === 'P') {
+predictText.className = "predict-result res-p";
+predictText.innerText = "PLAYER (XANH)";
+} else {
+predictText.className = "predict-result res-b";
+predictText.innerText = "BANKER (ĐỎ)";
+}
+showToast("AI đã ra kết quả dự đoán!");
+}
+// RENDER LỊCH SỬ CẦU
+function renderRoadmap() {
+const grid = document.getElementById('roadmapGrid');
+grid.innerHTML = '';
+App.history.slice(-18).forEach(item => {
+const dot = document.createElement('div');
+dot.className = ⁠dot dot-${item}⁠;
+dot.innerText = item;
+grid.appendChild(dot);
+});
+grid.scrollLeft = grid.scrollWidth;
+}
+// RENDER KHU VỰC BẢNG LỊCH SỬ ĐÚNG / SAI CHI TIẾT
+function renderAccuracyList() {
+const listContainer = document.getElementById('accuracyList');
+listContainer.innerHTML = '';
+let wins = 0;
+let losses = 0;
+App.accuracyHistory.forEach(item => {
+if (item.isWin) wins++; else losses++;
+const row = document.createElement('div');
+row.className = 'acc-item';
+row.innerHTML = ⁠<span class="acc-round">VÁN #${item.round}</span> <span class="acc-predict">AI: ${item.predicted === 'P' ? 'PLAYER' : 'BANKER'} | RA: ${item.actual}</span> <span class="acc-tag ${item.isWin ? 'tag-win' : 'tag-loss'}">${item.isWin ? 'THẮNG' : 'THUA'}</span>⁠;
+listContainer.appendChild(row);
+});
+// Cập nhật thẻ thống kê
+const total = wins + losses;
+const rate = total > 0 ? Math.round((wins / total) * 100) : 0;
+document.getElementById('statWin').innerText = wins;
+document.getElementById('statLoss').innerText = losses;
+document.getElementById('statRate').innerText = rate + '%';
+}
+// QUẢN LÝ XU ADMIN
+function addCoinsAdmin() {
+const amount = parseInt(document.getElementById('coinAmountInput').value);
+if (!isNaN(amount) && amount > 0) {
+App.coins += amount;
+updateCoinsDisplay();
+showToast(⁠Đã cộng thành công ${amount} Xu 🪙⁠);
+document.getElementById('coinAmountInput').value = '';
+} else {
+showToast("Vui lòng nhập số xu hợp lệ!");
+}
+}
+// TOAST NOTIFICATION
+function showToast(msg) {
+const toast = document.getElementById('toast');
+toast.innerText = msg;
+toast.classList.add('show');
+setTimeout(() => toast.classList.remove('show'), 2200);
+}
+</script>
+</body>
+</html>
